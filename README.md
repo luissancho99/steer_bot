@@ -11,7 +11,7 @@ mkdir -p <catkin_ws>/src
 
 # Clone the repo
 cd <catkin_ws>/src
-git clone https://github.com/srmainwaring/steer_bot
+git clone https://github.com/luissancho99/steer_bot
 
 # Checkout a version of `steer_drive_ros` patched for ROS Melodic
 git clone https://github.com/tsedl/steer_drive_ros.git
