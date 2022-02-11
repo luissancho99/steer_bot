@@ -1,0 +1,193 @@
+controller_frequency: 5.0
+recovery_behaviour_enabled: true
+
+NavfnROS:
+  allow_unknown: true # Specifies whether or not to allow navfn to create plans that traverse unknown space
+  default_tolerance: 0.1 # A tolerance on the goal point for the planner
+
+TrajectoryPlannerROS:
+  acc_lin_x: 2.5
+  acc_lim_theta: 3.2
+
+  max_vel_x: 1.0
+  min_vel_x: 0.0
+
+  max_vel_theta: 1.0
+  min_vel_theta: -1.0
+  min_in_place_vel_theta: 0.2
+
+  holonomic_robot: false
+  escape_vel: -0.1
+
+  # Goal Tolerance Parameters
+  yaw_goal_tolerance: 0.1
+  xy_goal_tolerance: 0.2
+  latch_xy_goal_tolerance: false
+
+  # Forward Simulation Parameters
+  sim_time: 2.0
+  sim_granularity: 0.0-2
+  angular_sim_granularity: 0.02
+  vx_samples: 6
+  vtheta_samples: 20
+  controller_frequency: 20.0
+
+  # Trajectory scoring parameters
+  meter_scoring: true 
+  occdist_scale: 0.1
+  pdist_scale: 0.75
+  gdist_scale: 1.0
+
+  heading_lookahead: 0.325
+  heading_scoring: false
+  heading_scoring_timestep: 0.8
+  dwa: true
+  simple_attractor: false
+  publish_cost_grid_pc: true
+
+  oscillation_reset_dist: 0.25
+  escape_reset_dist: 0.1
+  escape_reset_theta: 0.1
+
+DWAPlannerROS:
+  acc_lim_x: 2.5
+  acc_lim_y: 0
+  acc_lim_th: 3.2
+
+  max_vel_x: 0.5
+  min_vel_x: 0.0
+  max_vel_y: 0
+  min_vel_y: 0
+
+  max_trans_vel: 0.5
+  min_trans_vel: 0.1
+  max_rot_vel: 1.0
+  min_rot_vel: 0.2
+
+
+TebLocalPlannerROS:
+    #odom_topic: /odometry/filtered #localization -> /odometry/filtered | perfect_odometry -> /odom_perfect
+    map_frame: map
+
+    # Trajectory
+
+    teb_autosize: True
+    dt_ref: 0.4 # https://github.com/rst-tu-dortmund/teb_local_planner/issues/92
+    dt_hysteresis: 0.1
+    max_samples: 500
+    global_plan_overwrite_orientation: True
+    allow_init_with_backwards_motion: False # no backwards motion allowed
+    max_global_plan_lookahead_dist: 0.0
+    force_reinit_new_goal_dist: 100
+    global_plan_viapoint_sep: -1
+    global_plan_prune_distance: 10
+    exact_arc_length: False
+    feasibility_check_no_poses: 20
+    publish_feedback: False
+
+    # Robot
+
+    # NOTE We can't go backwards, that's why we enforce going only forward
+    # by setting weight_kinematics_forward_drive to a very high value
+    max_vel_x: 6.1
+    max_vel_x_backwards: 0.666 # should be > penalty_epsilon
+    acc_lim_x: 1.3
+
+    # TODO
+    max_vel_theta: 0.4 # the angular velocity is also bounded by min_turning_radius in case of a carlike robot (r = v / omega) -> 2.39
+    # TODO
+    acc_lim_theta: 4.0
+
+    # NOTE Non holonomic robot, hence we set weight_kinematics_nh to a very high value and max_vel_y 0
+    max_vel_y: 0.0
+
+    # ********************** Carlike robot parameters ********************
+    min_turning_radius: 2.55        # Min turning radius of the carlike robot (compute value using a model or adjust with rqt_reconfigure manually)
+    wheelbase: 0.97                 # Wheelbase of our robot
+    cmd_angle_instead_rotvel: False
+    # ********************************************************************
+
+    is_footprint_dynamic: False
+    footprint_model:
+        type: "polygon"
+        vertices: [ [0.65, -0.425],  [-1.0, -0.425], [-1.0, 0.425], [0.65, 0.425] ]
+
+    # GoalTolerance
+
+    xy_goal_tolerance: 0.2
+    yaw_goal_tolerance: 0.3
+    free_goal_vel: False
+    complete_global_plan: True
+
+    # Obstacles
+
+    min_obstacle_dist: 0.3
+    inflation_dist: 0.6
+    include_costmap_obstacles: True
+    costmap_obstacles_behind_robot_dist: 1.0 #To allow safe turning behaviors, this value should be non-zero
+    obstacle_poses_affected: 15
+
+    dynamic_obstacle_inflation_dist: 0.6
+    include_dynamic_obstacles: True
+
+    costmap_converter_plugin: ""
+    costmap_converter_spin_thread: True
+    costmap_converter_rate: 5
+
+    # Optimization
+
+    no_inner_iterations: 10
+    no_outer_iterations: 4
+    optimization_activate: True
+    optimization_verbose: False
+    penalty_epsilon: 0.1
+    obstacle_cost_exponent: 4 # Optimize narrow gap movement (https://github.com/rst-tu-dortmund/teb_local_planner/pull/140)
+    weight_max_vel_x: 2
+    weight_max_vel_theta: 10
+    weight_acc_lim_x: 1
+    weight_acc_lim_theta: 1
+    weight_kinematics_nh: 10000.0 # Max value to almost prevent holonomic movement.
+    weight_kinematics_forward_drive: 1000000.0 # A value around 1000 (max) almost prevents backward driving (but cannot be guaranteed).
+    weight_kinematics_turning_radius: 0.10 #1
+    weight_optimaltime: 1 # must be > 0
+    weight_shortest_path: 0
+    weight_obstacle: 100 # Optimize narrow gap movement (https://github.com/rst-tu-dortmund/teb_local_planner/pull/140)
+    weight_inflation: 0.2
+    weight_dynamic_obstacle: 10 # not in use yet
+    weight_dynamic_obstacle_inflation: 0.2
+    weight_viapoint: 1
+    weight_adapt_factor: 2
+
+    # Homotopy Class Planner
+
+    enable_homotopy_class_planning: True
+    enable_multithreading: True
+    max_number_classes: 4
+    selection_cost_hysteresis: 1.0
+    selection_prefer_initial_plan: 0.95
+    selection_obst_cost_scale: 1.0
+    selection_alternative_time_cost: False
+
+    roadmap_graph_no_samples: 15
+    roadmap_graph_area_width: 5
+    roadmap_graph_area_length_scale: 1.0
+    h_signature_prescaler: 0.5
+    h_signature_threshold: 0.1
+    obstacle_heading_threshold: 0.45
+    switching_blocking_period: 0.0
+    viapoints_all_candidates: True
+    delete_detours_backwards: True
+    max_ratio_detours_duration_best_duration: 3.0
+    visualize_hc_graph: False
+    visualize_with_time_as_z_axis_scale: False
+
+    # Recovery
+
+    shrink_horizon_backup: True
+    shrink_horizon_min_duration: 10
+    oscillation_recovery: True
+    oscillation_v_eps: 0.1
+    oscillation_omega_eps: 0.1
+    oscillation_recovery_min_duration: 10
+    oscillation_filter_duration: 10
+
