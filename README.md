@@ -24,6 +24,14 @@ rosdep check --from-paths src --ignore-src --rosdistro melodic
 # Install dependencies
 rosdep install --from-paths src --ignore-src --rosdistro melodic -y
 
+# TEB Local Planner
+sudo apt update
+sudo apt full-upgrade
+sudo apt-get install ros-melodic-teb-local-planner
+# SBPL Lattice Global Planner
+sudo apt-get install ros-melodic-sbpl
+sudo apt-get install ros-melodic-sbpl-lattice-planner
+
 # Build
 cd <catkin_ws>/src
 catkin build
