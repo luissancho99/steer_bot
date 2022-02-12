@@ -47,8 +47,9 @@
         <rosparam file="$(find steer_bot_navigation)/config/sbpl_lattice_planner_params.yaml" command="load"/>
 
 
-		<remap from="/cmd_vel" to="/steer_bot/ackermann_steering_controller/cmd_vel"/>
+	<!--	<remap from="/cmd_vel" to="/steer_bot/ackermann_steering_controller/cmd_vel"/> -->
 	</node>
 
 </launch>
+
 
