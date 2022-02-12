@@ -53,11 +53,11 @@ roslaunch steer_bot_navigation move_base.launch
 
 If all is working well you should see the robot in Gazebo and a custom map:
 
-![gazebo_model](https://github.com/luissancho99/steer_bot/blob/images/gazebo_model.png?raw=true)
+![gazebo_model](https://github.com/luissancho99/steer_bot/images/gazebo_model.png?raw=true)
 
 The robot model and odometry can be monitored in `rviz`, where position goals can be sent: 
 
-![rviz](https://github.com/luissancho99/steer_bot/blob/images/rviz.png?raw=true)
+![rviz](https://github.com/luissancho99/steer_bot/images/rviz.png?raw=true)
 
 
 
