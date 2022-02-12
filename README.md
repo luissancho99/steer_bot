@@ -39,42 +39,27 @@ catkin build
 
 ## Run
 
-Start the Gazebo simulation:
+Start the Gazebo and rviz simulation:
 
 ```bash
-roslaunch steer_bot_gazebo steer_bot_sim.launch
+roslaunch steer_bot_gazebo steer_bot_sim_obstacle.launch
 ```
 
-Start `rviz`:
+Start navigation:
 
 ```bash
-roslaunch steer_bot_viz view_steer_bot_robot.launch
+roslaunch steer_bot_navigation move_base.launch
 ```
 
-If all is working well you should see the robot in Gazebo and be able to
-command it using `rqt_robot_steering`:
+If all is working well you should see the robot in Gazebo and a custom map:
 
-![steer_gazebo rviz](https://raw.githubusercontent.com/wiki/srmainwaring/steer_bot/images/steer_bot_gazebo.png)
+![gazebo_model](https://github.com/luissancho99/steer_bot/blob/images/gazebo_model.png?raw=true)
 
-The robot model and odometry can be monitored in `rviz`: 
+The robot model and odometry can be monitored in `rviz`, where position goals can be sent: 
 
-![steer_bot rviz](https://raw.githubusercontent.com/wiki/srmainwaring/steer_bot/images/steer_bot_rviz.png)
-
-
-## Build Status
-
-### Develop Job Status
-
-|    | Melodic |
-|--- |--- |
-| steer_bot | [![Build Status](https://travis-ci.com/srmainwaring/steer_bot.svg?branch=develop)](https://travis-ci.com/srmainwaring/steer_bot) |
+![rviz](https://github.com/luissancho99/steer_bot/blob/images/rviz.png?raw=true)
 
 
-### Release Job Status
-
-|    | Melodic |
-|--- |--- |
-| steer_bot | [![Build Status](https://travis-ci.com/srmainwaring/steer_bot.svg?branch=master)](https://travis-ci.com/srmainwaring/steer_bot) |
 
 
 ## License
