@@ -53,7 +53,7 @@
         <node pkg="tf" type="static_transform_publisher" name="map_to_odom" args="0 0 0 0 0 0 1 map odom 100" />
 
 	<!-- Groundtruth odom -->
-        <node pkg="steer_bot_gazebo" type="groundtruth_odom" name="groundtruth_odom" respawn="false" output="screen">
+        <node pkg="steer_bot_gazebo" type="groundtruth_odom_node" name="groundtruth_odom_node" respawn="false" output="screen">
         </node>
         
         <!-- Spawn robot in Gazebo -->

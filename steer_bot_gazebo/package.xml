@@ -10,6 +10,18 @@
     <url type="bugtracker">https://github.com/srmainwaring/steer_bot/issues</url>
     <author email="rhys.mainwaring@me.com">Rhys Mainwaring</author>
     <buildtool_depend>catkin</buildtool_depend>
+    <build_depend>roscpp</build_depend>
+    <build_depend>tf</build_depend>
+    <build_depend>geometry_msgs</build_depend>
+    <build_depend>nav_msgs</build_depend>
+    <build_depend>gazebo_msgs</build_depend>
+    
+    <build_export_depend>roscpp</build_export_depend>
+    <build_export_depend>tf</build_export_depend>
+    <build_export_depend>geometry_msgs</build_export_depend>
+    <build_export_depend>nav_msgs</build_export_depend>
+    <build_export_depend>gazebo_msgs</build_export_depend>
+
     <exec_depend>ackermann_steering_controller</exec_depend>
     <exec_depend>controller_manager</exec_depend>
     <exec_depend>gazebo_ros</exec_depend>
@@ -23,4 +35,9 @@
     <exec_depend>steer_bot_hardware_gazebo</exec_depend>
     <exec_depend>steer_drive_controller</exec_depend>
     <exec_depend>xacro</exec_depend>
+    <exec_depend>roscpp</exec_depend>
+    <exec_depend>tf</exec_depend>
+    <exec_depend>geometry_msgs</exec_depend>
+    <exec_depend>nav_msgs</exec_depend>
+    <exec_depend>gazebo_msgs</exec_depend>
 </package>
