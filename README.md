@@ -42,7 +42,7 @@ catkin build
 Start the Gazebo and rviz simulation:
 
 ```bash
-roslaunch steer_bot_gazebo steer_bot_sim_obstacle.launch
+roslaunch steer_bot_gazebo steer_bot_sim_obstacles.launch
 ```
 
 Start navigation:
